@@ -1,17 +1,17 @@
 package com.management.cradle.dao;
 
-import java.util.Collection;
-
+import java.util.*;
 import org.springframework.stereotype.Repository;
 
 import com.management.cradle.model.Counters;
 import com.management.cradle.model.Customer;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 @Repository
 public class CustomerDAO {
+	
 	@PersistenceContext
 	EntityManager entityManager;
 	
@@ -27,6 +27,7 @@ public class CustomerDAO {
 		}	
 	}
 	
+	@Transactional
 	public void registerCustomer(Customer customer) {
 		
 		try {
@@ -34,14 +35,14 @@ public class CustomerDAO {
 			Counters counterAddressId = entityManager.find(Counters.class, "customerAddress");
 			
 			 
-			String CustomerId = counterCustomerId.getIntitialValue() + counterCustomerId.nextValue();
-			String AddressId = counterAddressId.getIntitialValue() + counterAddressId.nextValue();
+			String CustomerId = counterCustomerId.getInitialValue() + counterCustomerId.nextValue();
+			String AddressId = counterAddressId.getInitialValue() + counterAddressId.nextValue();
 			
 			customer.setCustomerId(CustomerId);
 			customer.setFirstName(customer.getFirstName());
 			customer.setLastName(customer.getLastName());
 			customer.setEmailId(customer.getEmailId());
-			customer.setMobileNumber(customer.getMobileNumber());
+			customer.setMobileNo(customer.getMobileNo());
 			customer.setPassword(customer.getPassword());
 			customer.setAddressId(AddressId);
 			
@@ -52,4 +53,5 @@ public class CustomerDAO {
 		  throw new RuntimeException(e);	
 		}
 	}
+	
 }

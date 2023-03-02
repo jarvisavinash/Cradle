@@ -1,27 +1,26 @@
 package com.management.cradle.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="counters")
+@Table(name="Counters")
 public class Counters {
 
   @Id	
   private String counterId;
   private int nextValue;
   private String initialValue;
+  
   public Counters() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Counters(String counterId, int nextValue, String intitialValue) {
+	public Counters(String counterId, int nextValue, String initialValue) {
 		super();
 		this.counterId = counterId;
 		this.nextValue = nextValue;
-		this.initialValue = intitialValue;
+		this.initialValue = initialValue;
 	}
 	
 	@Id
@@ -41,17 +40,17 @@ public class Counters {
 		this.nextValue = nextValue;
 	}
 	
-	public String getIntitialValue() {
+	public String getInitialValue() {
 		return initialValue;
 	}
 	
-	public void setIntitialValue(String intitialValue) {
-		this.initialValue = intitialValue;
+	public void setInitialValue(String initialValue) {
+		this.initialValue = initialValue;
 	}
 	
 	@Override
 	public String toString() {
-		return "Counters [counterId=" + counterId + ", nextValue=" + nextValue + ", intitialValue=" + initialValue
+		return "Counters [counterId=" + counterId + ", nextValue=" + nextValue + ", initialValue=" + initialValue
 				+ "]";
 	}
 	
