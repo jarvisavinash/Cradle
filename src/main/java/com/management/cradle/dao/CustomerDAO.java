@@ -1,6 +1,7 @@
 package com.management.cradle.dao;
 
 import java.util.*;
+
 import org.springframework.stereotype.Repository;
 
 import com.management.cradle.model.Counters;
@@ -52,6 +53,35 @@ public class CustomerDAO {
 		catch(Exception e) {
 		  throw new RuntimeException(e);	
 		}
+	}
+	
+	public Collection<Customer> loginCustomer(Customer cust)
+	{ 
+		 
+		 try {
+			 
+			 TypedQuery<Customer> query = entityManager.createQuery("SELECT x FROM Customer x  WHERE x.emailId = :mail AND x.password = :pass", Customer.class);
+
+			 
+			 String mail =  cust.getEmailId();
+			 String password = cust.getPassword();
+			 
+			 
+			List<Customer> customer =  query
+					.setParameter("mail" , mail)
+					.setParameter("pass", password)
+					.getResultList();
+
+			
+			System.out.println(customer);	 
+			
+			return customer;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+		 
 	}
 	
 }

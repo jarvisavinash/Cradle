@@ -11,36 +11,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.management.cradle.dao.CustomerDAO;
-import com.management.cradle.model.Customer;
+import com.management.cradle.dao.OrdersDAO;
+import com.management.cradle.model.Orders;
+import com.management.cradle.model.OrdersList;
+
+
 
 @RestController
 @CrossOrigin
-@RequestMapping("/customer")
-public class CustomerRestController {
-
+@RequestMapping("/orders")
+public class OrdersRestController {
+	
 	@Autowired
-	CustomerDAO customerDAO;
+	OrdersDAO ordersDAO;
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Customer> getAllCustomer(){
+	public Collection<Orders> getAllOrderDetails(){
 		
-		return customerDAO.getAllCustomers();
+		return ordersDAO.getAllOrderDetails();
+		
 	}
 	
 	@PostMapping(value="/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void registerCustomer(@RequestBody Customer customer) {
+	public void saveOrdersDetails(@RequestBody Orders orders) {
 		
-		System.out.println(customer);
-		customerDAO.registerCustomer(customer);
+		ordersDAO.saveOrdersDetails(orders);
+		System.out.println(orders);
 	}
 	
-	@PostMapping(value="/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public  Collection<Customer> loginCustomer(@RequestBody Customer cust)
-	{
+	@PostMapping(value="/saveOrdersList", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void saveOrdersDetails(@RequestBody OrdersList ordersList) {
 		
-		System.out.println(cust);
-		 return customerDAO.loginCustomer(cust);
+		ordersDAO.saveOrdersList(ordersList);
+		System.out.println(ordersList);
 	}
-	
+
 }
